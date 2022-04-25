@@ -12,6 +12,11 @@ main{
 }
 
 .grid{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: start;
+
   width: 500px;
   height: 500px;
 }
