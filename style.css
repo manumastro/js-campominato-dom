@@ -1,0 +1,49 @@
+body{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.minefield{
+  height: 100vh;
+}
+
+main{
+  background-color: #5bebcf;
+  height: 100%;
+}
+
+.grid{
+  width: 500px;
+  height: 500px;
+}
+
+.cell{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+}
+
+.square100{
+  width: calc(100% / 10);
+  height: calc(100% / 10);
+}
+
+.square81{
+  width: calc(100% / 9);
+  height: calc(100% / 9);
+}
+
+.square49{
+  width: calc(100% / 7);
+  height: calc(100% / 7);
+}
+
+.clicked{
+  background-color: aqua;
+  color: white;
+}
+
+.bomb{
+  background-color: brown;
+  color: white;
+}
