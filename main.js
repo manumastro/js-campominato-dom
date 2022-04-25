@@ -16,20 +16,26 @@ function generateGrid(cellNumbers){
   grid.className = 'grid';  /*assegno al div grid la classe grid*/
 
   for(let i = 1; i <= cellNumbers; i++){ /*ciclo for per creare le celle*/
-    const cell = document.createElement('div'); /*creo il div cella*/
-    cell.className = 'cell square' + cellNumbers; /*assegno a cell la classe cell, square(con il numero di celle*/
-    cell.innerHTML = `<span>${i}</span>`; /*inserisco il numero con uno span per ogni cell*/
-    grid.append(cell); /*appendo a grid l'elemento cell*/
-    cell.addEventListener('click', clickColor);/*al click della cella invoco una funzione che cambierà il colore della cella*/
+    const cell = generateCell(i, cellNumbers); /*evoco una funzione per generare le celle*/
+    grid.append(cell); /*appendo l'elemento cell a l'elememto grid*/
   }
-  main.append(grid); /*appendo al main l'elemento grid*/
-  
 
+  main.append(grid); /*appendo al main l'elemento grid*/
+}
+
+function generateCell(i, cellNumbers){
+  const cell = document.createElement('div'); /*creo l'elemento cell*/
+  cell.className = 'cell'; /*assegno la classe cell all'elemento cell*/
+  cell.classList.add('square' + cellNumbers); /*aggiungo la classe square + il numero delle celle (square100 / square81 / square49) */
+  cell.innerHTML = `<span>${i}</span>`; /*aggiungo il numero della cella con uno span*/
+  cell.addEventListener('click', clickColor); /*al click della cella evoco una funzione che ne cambi il colore*/
+  
+  return cell;
 }
 
 
 function clickColor(){
-  this.classList.add('clicked');
+  this.classList.add('clicked'); /*aggiungo la classe clicked che cambia il colore*/
 }
 
 
