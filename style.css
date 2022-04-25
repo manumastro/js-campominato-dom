@@ -26,6 +26,7 @@ main{
   justify-content: center;
   align-items: center;
   border: 1px solid black;
+  cursor: pointer;
 }
 
 .square100{
@@ -44,7 +45,7 @@ main{
 }
 
 .clicked{
-  background-color: aqua;
+  background-color: rgb(72, 141, 141);
   color: white;
 }
 

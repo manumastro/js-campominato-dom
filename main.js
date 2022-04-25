@@ -15,17 +15,31 @@ function generateGrid(cellNumbers){
   const grid = document.createElement('div'); /*creo il div grid*/
   grid.className = 'grid';  /*assegno al div grid la classe grid*/
 
-  for(let i = 1; i <= cellNumbers; i++){ /*ciclo for per creare la griglia in base al numero di celle*/
+  for(let i = 1; i <= cellNumbers; i++){ /*ciclo for per creare le celle*/
     const cell = document.createElement('div'); /*creo il div cella*/
     cell.className = 'cell square' + cellNumbers; /*assegno a cell la classe cell, square(con il numero di celle*/
     cell.innerHTML = `<span>${i}</span>`; /*inserisco il numero con uno span per ogni cell*/
     grid.append(cell); /*appendo a grid l'elemento cell*/
-
-  console.log(cell);
+    cell.addEventListener('click', clickColor);/*al click della cella invoco una funzione che cambierà il colore della cella*/
   }
-
   main.append(grid); /*appendo al main l'elemento grid*/
+  
+
 }
+
+
+function clickColor(){
+  this.classList.add('clicked');
+}
+
+
+
+
+
+
+
+
+
 
 function reset(){
   main.innerHTML = ''; /*svuoto il main*/
