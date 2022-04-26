@@ -2,13 +2,18 @@ const main = document.querySelector('main'); /*recupero il main salvandolo in un
 document.getElementById('play').addEventListener('click', play); /*Recupero il button per evocare la funzione play al click*/
 
 
+
+
 function play(){
   reset(); /*Invoco la funzione reset ogni volta che viene evocata la funzione play*/
+
   const difficulty = document.getElementById('difficulty').value; /*recupero il value della select*/
   const gridDifficulty = [100, 81, 49]; /*creo un array con i 3 possibili numeri di celle*/
   const cellNumbers = gridDifficulty[difficulty]; /*assegno ad ogni value(0, 1, 2) il corrispondente numero di celle e lo salvo in una costante*/
 
   generateGrid(cellNumbers); /*funzione che genera la griglia*/
+
+  const bombs = generateBombs(cellNumbers); /*richiamo una funzione che generi le bombe*/
 }
 
 function generateGrid(cellNumbers){
@@ -28,23 +33,33 @@ function generateCell(i, cellNumbers){
   cell.className = 'cell'; /*assegno la classe cell all'elemento cell*/
   cell.classList.add('square' + cellNumbers); /*aggiungo la classe square + il numero delle celle (square100 / square81 / square49) */
   cell.innerHTML = `<span>${i}</span>`; /*aggiungo il numero della cella con uno span*/
-  cell.addEventListener('click', clickColor); /*al click della cella evoco una funzione che ne cambi il colore*/
+  cell.addEventListener('click', clickCell); /*al click della cella evoco una funzione che scatena dei processi di fine gioco*/
   
   return cell;
 }
 
 
-function clickColor(){
+function generateBombs(cellNumbers){
+  const arrayBombs = []; //dichiaro un'array che conterrà le bombe*/
+
+  
+  while(arrayBombs.length < 16){ //ciclo while in cui vengono generate le bombe fino a quando non sono 16*/
+    const bomb = random(1, cellNumbers); //richiamo una funzione che mi generi randomicamente in numeri delle bombe
+    if(!arrayBombs.includes(bomb)){ //se l'array non include già la bomba allora la pusho
+        arrayBombs.push(bomb);
+      }
+    }
+
+  return arrayBombs;
+}
+
+function clickCell(){
   this.classList.add('clicked'); /*aggiungo la classe clicked che cambia il colore*/
 }
 
-
-
-
-
-
-
-
+function random(min, max){
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
 
 function reset(){
