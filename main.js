@@ -66,13 +66,25 @@ function clickCell(){
   }
 }
 
-function endGame(b){
+//funzione che stampa un messaggio quando si perde, e che colora la bomba di marrone
+function endGame(b){  
   console.log('fine');
   b.classList.add('bomb');
 
   main.innerHTML += `<h2 class="mt-5">Numero di tentativi: ${c} su ${N_BOMBS} bombe</h2>`
-
+  showBombs();
 }
+
+function showBombs(){ //funziona che colora tutte le bombe quando ne viene "calpestata" una
+  const cells = document.getElementsByClassName('cell');
+  for(let i = 0; i < cells.length; i++){
+    if(bombs.includes(i + 1)){
+      cells[i].classList.add('bomb');
+    }
+  }
+  console.log(cells);
+}
+
 
 function random(min, max){
   return Math.floor(Math.random() * (max - min + 1) + min);
