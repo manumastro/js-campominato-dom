@@ -3,7 +3,7 @@ document.getElementById('play').addEventListener('click', play); //Recupero il b
 let bombs = [];
 let c = 0;
 
-const N_BOMBS = 1;
+const N_BOMBS = 16;
 
 function play(){
   reset(); //Invoco la funzione reset ogni volta che viene evocata la funzione play//
