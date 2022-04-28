@@ -1,8 +1,9 @@
 const main = document.querySelector('main'); /*recupero il main salvandolo in una costante per il reset*/
 document.getElementById('play').addEventListener('click', play); /*Recupero il button per evocare la funzione play al click*/
+let bombs = [];
+let c = 0;
 
-
-
+const N_BOMBS = 16;
 
 function play(){
   reset(); /*Invoco la funzione reset ogni volta che viene evocata la funzione play*/
@@ -13,7 +14,8 @@ function play(){
 
   generateGrid(cellNumbers); /*funzione che genera la griglia*/
 
-  const bombs = generateBombs(cellNumbers); /*richiamo una funzione che generi le bombe*/
+  bombs = generateBombs(cellNumbers); /*richiamo una funzione che generi le bombe*/
+  console.log(bombs);
 }
 
 function generateGrid(cellNumbers){
@@ -33,6 +35,7 @@ function generateCell(i, cellNumbers){
   cell.className = 'cell'; /*assegno la classe cell all'elemento cell*/
   cell.classList.add('square' + cellNumbers); /*aggiungo la classe square + il numero delle celle (square100 / square81 / square49) */
   cell.innerHTML = `<span>${i}</span>`; /*aggiungo il numero della cella con uno span*/
+  cell.myNumber = i;
   cell.addEventListener('click', clickCell); /*al click della cella evoco una funzione che scatena dei processi di fine gioco*/
   
   return cell;
@@ -40,13 +43,13 @@ function generateCell(i, cellNumbers){
 
 
 function generateBombs(cellNumbers){
-  const arrayBombs = []; //dichiaro un'array che conterrà le bombe*/
+  arrayBombs = []; //dichiaro un'array che conterrà le bombe*/
 
   
-  while(arrayBombs.length < 16){ //ciclo while in cui vengono generate le bombe fino a quando non sono 16*/
-    const bomb = random(1, cellNumbers); //richiamo una funzione che mi generi randomicamente in numeri delle bombe
-    if(!arrayBombs.includes(bomb)){ //se l'array non include già la bomba allora la pusho
-        arrayBombs.push(bomb);
+  while(arrayBombs.length < N_BOMBS){ //ciclo while in cui vengono generate le bombe fino a quando non sono 16*/
+    bombs = random(1, cellNumbers); //richiamo una funzione che mi generi randomicamente in numeri delle bombe
+    if(!arrayBombs.includes(bombs)){ //se l'array non include già la bomba allora la pusho
+        arrayBombs.push(bombs);
       }
     }
 
@@ -54,13 +57,26 @@ function generateBombs(cellNumbers){
 }
 
 function clickCell(){
-  this.classList.add('clicked'); /*aggiungo la classe clicked che cambia il colore*/
+  if(!bombs.includes(this.myNumber)){
+    c++;
+    this.classList.add('clicked'); //aggiungo la classe clicked che cambia il colore della cella non bomba
+    console.log('ok', this.myNumber);
+  }else{
+    endGame(this);
+  }
+}
+
+function endGame(b){
+  console.log('fine');
+  b.classList.add('bomb');
+
+  main.innerHTML += `<h2 class="mt-5">Numero di tentativi: ${c} su ${N_BOMBS} bombe</h2>`
+
 }
 
 function random(min, max){
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
-
 
 function reset(){
   main.innerHTML = ''; /*svuoto il main*/
